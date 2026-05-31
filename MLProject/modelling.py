@@ -1,4 +1,5 @@
 import mlflow
+import mlflow.sklearn
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
@@ -24,16 +25,17 @@ model = RandomForestRegressor(
     random_state=42
 )
 
-model.fit(X_train, y_train)
+with mlflow.start_run():
 
-y_pred = model.predict(X_test)
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
 
-mse = mean_squared_error(y_test, y_pred)
-mae = mean_absolute_error(y_test, y_pred)
-r2 = r2_score(y_test, y_pred)
+    mse = mean_squared_error(y_test, y_pred)
+    mae = mean_absolute_error(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred)
 
-mlflow.log_metric("mse", mse)
-mlflow.log_metric("mae", mae)
-mlflow.log_metric("r2", r2)
+    mlflow.log_metric("mse", mse)
+    mlflow.log_metric("mae", mae)
+    mlflow.log_metric("r2", r2)
 
-mlflow.sklearn.log_model(model, "model")
+    mlflow.sklearn.log_model(model, "model")
