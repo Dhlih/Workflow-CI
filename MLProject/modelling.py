@@ -6,7 +6,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 mlflow.set_experiment(experiment_name="anime_score_prediction")
 
-df = pd.read_csv("anime_preprocessing (5).csv")
+df = pd.read_csv("anime_preprocessing.csv")
 
 X = df.drop(columns=["score"])
 y = df["score"]
@@ -27,23 +27,3 @@ with mlflow.start_run():
     print(f"MAE: {mae}")
     print(f"MSE: {mse}")
     print(f"R2 Score: {r2}")
-
-importance = pd.DataFrame({
-    "feature": X.columns,
-    "importance": model.feature_importances_
-})
-
-print(importance.sort_values(
-    by="importance",
-    ascending=False
-).head(20))
-
-importance_df = pd.DataFrame({
-    "feature": X.columns,
-    "importance": model.feature_importances_
-})
-
-print(importance_df.sort_values(
-    by="importance",
-    ascending=False
-).head(20))
