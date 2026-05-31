@@ -4,9 +4,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
-mlflow.set_tracking_uri("file:./mlruns")
-mlflow.set_experiment("anime_score_prediction")
-
 df = pd.read_csv("anime_preprocessing.csv")
 
 X = df.drop(columns=["score"])
