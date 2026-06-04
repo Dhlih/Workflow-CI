@@ -8,6 +8,7 @@ on:
 env:
   MLFLOW_TRACKING_URI: "file://${{ github.workspace }}/mlruns"
   DATASET_ID: "18avUQ0B2-6cxW_UYF1-KIbGxAXAsdh0O"
+  MLFLOW_ALLOW_FILE_STORE: "true" # <--- BARIS BARU: Mengizinkan penggunaan folder mlruns lokal
 
 jobs:
   train:
